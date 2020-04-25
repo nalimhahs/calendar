@@ -24,27 +24,27 @@ class Event {
     }
 }
 
-public class awtver extends Frame {
+public class MainFrame extends Frame {
 
-    Calendar c = Calendar.getInstance();
-    MonthHeader monthHeader = new MonthHeader(c);
-    YearChangePanel yearChangePanel = new YearChangePanel(c);
+    static Calendar c = Calendar.getInstance();
+    static MonthHeader monthHeader = new MonthHeader(c);
+    static YearChangePanel yearChangePanel = new YearChangePanel(c);
     Button nextMonth = new Button("Next Month");
     Button prevMonth = new Button("Prev Month");
-    MonthPanel monthPanel = new MonthPanel(c);
-    
-    awtver() {
+    static MonthPanel monthPanel = new MonthPanel(c);
+
+    MainFrame() {
 
         nextMonth.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
                 c.set(Calendar.MONTH, monthPanel.getCalendarObject().get(Calendar.MONTH));
-                redraw(c);
+                redraw();
             }
         });
         prevMonth.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
                 c.set(Calendar.MONTH, monthPanel.getCalendarObject().get(Calendar.MONTH) - 2);
-                redraw(c);
+                redraw();
             }
         });
 
@@ -60,14 +60,19 @@ public class awtver extends Frame {
         setVisible(true);
     }
 
-    void redraw(Calendar c) {
+    static void redraw() {
         yearChangePanel.updateYear(c);
         monthHeader.redraw(c);
         monthPanel.setCalendar(c);
     }
 
+    static void updateYearCallback(int year) {
+        c.set(Calendar.YEAR, year);
+        redraw();
+    }
+
     public static void main(String args[]) {
-        awtver f = new awtver();
+        MainFrame f = new MainFrame();
 
         f.addWindowListener(new WindowAdapter() {
             public void windowClosing(WindowEvent e) {
@@ -99,13 +104,6 @@ class MonthHeader extends Panel {
     }
 
     String getMonth() {
-        // int m = cal.get(Calendar.MONTH);
-        // if (m <= 0) {
-        //     m = 11;
-        // } else {
-        //     m -= 1;
-        // }
-        // String month = new DateFormatSymbols().getMonths()[m];
         return cal.getDisplayName(Calendar.MONTH, Calendar.LONG, Locale.getDefault());
     }
 
@@ -138,7 +136,7 @@ class YearChangePanel extends Panel {
 
         yearChoice.addItemListener(new ItemListener() {
             public void itemStateChanged(ItemEvent e) {
-                System.out.println(yearChoice.getSelectedItem());
+                MainFrame.updateYearCallback(Integer.parseInt(yearChoice.getSelectedItem().trim()));
             }
         });
     }
