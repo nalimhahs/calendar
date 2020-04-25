@@ -1,6 +1,5 @@
 import java.awt.*;
 import java.awt.event.*;
-import java.text.DateFormatSymbols;
 import java.util.Date;
 import java.util.Locale;
 import java.util.Calendar;
