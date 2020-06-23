@@ -282,6 +282,8 @@ class DayPanel extends Panel {
         public void mouseClicked(MouseEvent event) {
             if (dayPanel.date != null) {
                 System.out.println(dayPanel.date.getDate());
+                // replace with db connector here
+                new EventFrame(date, new DataStore());
             }
         }
 

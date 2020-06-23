@@ -52,6 +52,7 @@ class EventListPanel extends Panel {
         this.dbConnector = dbConnector;
         this.date = date;
         setLayout(new BoxLayout(this, BoxLayout.Y_AXIS));
+        add(new AddEventPanel(this));
         redraw();
     }
 
@@ -155,6 +156,7 @@ class AddEventPanel extends Panel implements ActionListener {
     public void actionPerformed(ActionEvent e) {
         if (e.getSource() == addButton) {
             parent.addCallback(tf.getText());
+            tf.setText("");
         }
     }
 }
