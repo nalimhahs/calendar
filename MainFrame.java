@@ -219,7 +219,8 @@ class DayPanel extends Panel {
         }
 
         eventLabel = new Label(String.valueOf(""));
-        if (this.eventCount > 0) {
+        // back to zero here too
+        if (this.eventCount > 3) {
             eventLabel.setText(String.valueOf(this.eventCount));
         }
 
@@ -259,8 +260,8 @@ class DayPanel extends Panel {
         } else {
             dayLabel.setText("");
         }
-
-        if (this.eventCount > 0) {
+        // change limit to 0 to go back to normal lmao
+        if (this.eventCount > 3) {
             eventLabel.setText(String.valueOf(this.eventCount));
         } else {
             eventLabel.setText("");
