@@ -5,24 +5,6 @@ import java.util.Locale;
 import java.util.Calendar;
 import java.util.ArrayList;
 
-class Event {
-    Date date;
-    ArrayList<String> events = new ArrayList<String>();
-
-    Event(Date d, ArrayList<String> e) {
-        date = d;
-        events = e;
-    }
-
-    int getEventCount() {
-        return events.size();
-    }
-
-    void addEvent(String s) {
-        events.add(s);
-    }
-}
-
 public class MainFrame extends Frame {
 
     static Calendar c = Calendar.getInstance();
@@ -159,7 +141,6 @@ class MonthPanel extends Panel {
     void setCalendar(Calendar cal) {
         c = cal;
         redraw();
-        System.out.println(c.get(Calendar.MONTH));
     }
 
     Calendar getCalendarObject() {
