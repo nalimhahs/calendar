@@ -57,7 +57,7 @@ class EventListPanel extends Panel {
 
     void fetchData() {
         // call data store to fetch data
-        events = dbConnector.fetch();
+        events = dbConnector.fetch(date);
     }
 
     void clearCurrentList() {

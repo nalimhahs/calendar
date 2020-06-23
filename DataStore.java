@@ -35,7 +35,7 @@ public class DataStore {
         events.remove(event);
     }
 
-    ArrayList<Event> fetch() {
+    ArrayList<Event> fetch(Date date) {
         return events;
     }
 }
