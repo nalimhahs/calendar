@@ -3,7 +3,6 @@ import java.awt.event.*;
 import java.util.Date;
 import java.util.Locale;
 import java.util.Calendar;
-import java.util.ArrayList;
 
 public class MainFrame extends Frame {
 

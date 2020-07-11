@@ -35,9 +35,6 @@ public class EventFrame extends Frame {
         });
     }
 
-    public static void main(String args[]) {
-        EventFrame f = new EventFrame(new Date(), new DataStore());
-    }
 }
 
 class EventListPanel extends Panel {
