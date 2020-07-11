@@ -1,0 +1,1 @@
+java -cp bin:mysql-connector.jar MainFrame
