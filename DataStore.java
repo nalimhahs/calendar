@@ -1,6 +1,75 @@
 import java.util.ArrayList;
 import java.util.Date;
 
+import java.sql.*;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+
+class MysqlCon {
+
+    static Connection con = null;
+    static Statement stmt = null;
+
+    MysqlCon() {
+        try {
+            Class.forName("com.mysql.cj.jdbc.Driver");
+            con = DriverManager.getConnection("jdbc:mysql://localhost:3306/calendar", "root", "root");
+            stmt = con.createStatement();
+
+        } catch (Exception e) {
+            System.out.println(e);
+        }
+    }
+
+    public static void main(String args[]) {
+
+        MysqlCon db = new MysqlCon();
+        db.fetch(new Date());
+        try {
+            con.close();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+    }
+
+    void add(String text, Date date) {
+        try {
+            PreparedStatement pstmt = con.prepareStatement("insert into events (edesc, edate) " + " values (?, ?)");
+            java.sql.Date sqlDate = new java.sql.Date(date.getTime());
+            pstmt.setString(1, text);
+            pstmt.setDate(2, sqlDate);
+            pstmt.execute();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+    }
+
+    void delete(Event event) {
+        try {
+            PreparedStatement pstmt = con.prepareStatement("delete from events where eid=(?)");
+            pstmt.setInt(1, event.id);
+            pstmt.execute();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+    }
+
+    ArrayList<Event> fetch(Date date) {
+        ArrayList<Event> events = new ArrayList<Event>();
+        try {
+            PreparedStatement pstmt = con.prepareStatement("select * from events where edate=(?)");
+            java.sql.Date sqlDate = new java.sql.Date(date.getTime());
+            pstmt.setDate(1, sqlDate);
+            ResultSet rs = pstmt.executeQuery();
+            while (rs.next())
+                events.add(new Event(rs.getInt(1), rs.getDate(2), rs.getString(3)));
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return events;
+    }
+}
+
 class Event {
     int id;
     Date date;
