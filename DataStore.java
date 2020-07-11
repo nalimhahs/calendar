@@ -5,12 +5,12 @@ import java.sql.*;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 
-class MysqlCon {
+public class DataStore {
 
     static Connection con = null;
     static Statement stmt = null;
 
-    MysqlCon() {
+    DataStore() {
         try {
             Class.forName("com.mysql.cj.jdbc.Driver");
             con = DriverManager.getConnection("jdbc:mysql://localhost:3306/calendar", "root", "root");
@@ -23,7 +23,7 @@ class MysqlCon {
 
     public static void main(String args[]) {
 
-        MysqlCon db = new MysqlCon();
+        DataStore db = new DataStore();
         db.fetch(new Date());
         try {
             con.close();
@@ -86,10 +86,10 @@ class Event {
     }
 }
 
-public class DataStore {
+class DataStoreBak {
     ArrayList<Event> events = new ArrayList<Event>();
 
-    DataStore() {
+    DataStoreBak() {
         for (int i = 0; i < 10; i++) {
             events.add(new Event(i, new Date(), "aaaaaaaaaaaaaaaa" + String.valueOf(i)));
         }
