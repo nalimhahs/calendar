@@ -10,7 +10,7 @@ public class DataStore {
     DataStore() {
         try {
             Class.forName("com.mysql.cj.jdbc.Driver");
-            con = DriverManager.getConnection("jdbc:mysql://localhost:3306/calendar", "root", "root");
+            con = DriverManager.getConnection("jdbc:mysql://sql12.freemysqlhosting.net:3306/sql12356243", "sql12356243", "i4MHL3KZe6");
         } catch (Exception e) {
             System.out.println(e);
         }
