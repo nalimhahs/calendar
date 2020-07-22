@@ -1,1 +1,1 @@
-java -cp "bin;mysql-connector.jar" MainFrame
+java -cp "bin:mysql-connector.jar" MainFrame
